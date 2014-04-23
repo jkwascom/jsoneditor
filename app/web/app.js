@@ -297,7 +297,10 @@ app.saveToCloud = function() {
     var data = codeEditor.getText();
     if (app.document) {
         app.document.Data = data;
-        documentsRepository.update(app.document);
+        when(documentsRepository.update(app.document))
+            .then(function() {
+                showSavedNotification();
+            });
     } else
         saveNewFile();
 
