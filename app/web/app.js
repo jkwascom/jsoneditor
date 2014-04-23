@@ -214,14 +214,14 @@ app.load = function() {
 
 function setUpSaveToCloudButton() {
     var domSave = document.getElementById('saveCloud');
-    domSave.onclick = app.saveToCloud;
+    //domSave.onclick = app.saveToCloud;
     domSave = document.getElementById('menuSaveCloud');
     domSave.onclick = app.saveToCloud;
 }
 
 function setUpOpenFromCloudButton() {
     var domSave = document.getElementById('open');
-    domSave.onclick = app.openFromCloud;
+    //domSave.onclick = app.openFromCloud;
     domSave = document.getElementById('menuOpenCloud');
     domSave.onclick = app.openFromCloud;
 }
@@ -399,6 +399,7 @@ app.clearFile = function() {
     var json = {};
     codeEditor.set(json);
     treeEditor.set(json);
+    app.document = null;
 };
 
 app.resize = function() {
