@@ -191,6 +191,9 @@ app.load = function() {
         var domSave = document.getElementById('save');
         domSave.onclick = app.saveFile;
 
+        setUpSaveToCloudButton();
+        setUpOpenFileModalSubmit();
+        setUpOpenFromCloudButton();
         // set focus on the code editor
         codeEditor.focus();
 
@@ -208,6 +211,20 @@ app.load = function() {
     }
 };
 
+
+function setUpSaveToCloudButton() {
+    var domSave = document.getElementById('saveCloud');
+    domSave.onclick = app.saveToCloud;
+    domSave = document.getElementById('menuSaveCloud');
+    domSave.onclick = app.saveToCloud;
+}
+
+function setUpOpenFromCloudButton() {
+    var domSave = document.getElementById('open');
+    domSave.onclick = app.openFromCloud;
+    domSave = document.getElementById('menuOpenCloud');
+    domSave.onclick = app.openFromCloud;
+}
 /**
  * Callback method called when a file or url is opened.
  * @param {Error} err
@@ -254,16 +271,7 @@ app.openUrl = function(url) {
  * Open a file explorer to save the file.
  */
 app.saveFile = function() {
-    // first synchronize both editors contents
-    if (app.lastChanged == treeEditor) {
-        app.treeToCode();
-    }
-    /* TODO: also sync from code to tree editor? will clear the history ...
-   if (app.lastChanged == codeEditor) {
-   app.CodeToEditor();
-   }
-   */
-    app.lastChanged = undefined;
+    syncEditors();
 
     // save the text from the code editor
     // TODO: show a 'saving...' notification
@@ -275,6 +283,96 @@ app.saveFile = function() {
     });
 };
 
+function syncEditors() {
+    if (app.lastChanged == treeEditor) {
+        app.treeToCode();
+    }
+    app.lastChanged = undefined;
+
+}
+
+app.saveToCloud = function() {
+    syncEditors();
+    var documentsRepository = new DocumentsCloudRepository();
+    var data = codeEditor.getText();
+    if (app.document) {
+        app.document.Data = data;
+        documentsRepository.update(app.document);
+    } else
+        saveNewFile();
+
+    function saveNewFile() {
+        var doc = {
+            Name: getFileName(),
+            Data: data,
+            DateCreated: new Date()
+        };
+        when(documentsRepository.add(doc))
+            .then(function(doc) {
+                app.document = doc;
+                showSavedNotification();
+            });
+    }
+
+    function getFileName() {
+        return prompt('Filename:');
+    }
+
+    function showSavedNotification() {
+        if (app.savedNotificationTimeout)
+            clearTimeout(app.savedNotificationTimeout);
+
+        var savedNotification = $('.saved-notification').show();
+        app.savedNotificationTimeout = setTimeout(function() {
+            savedNotification.hide();
+        }, 2000);
+    }
+};
+
+function setUpOpenFileModalSubmit() {
+    $('#openFileModalSubmit').click(function() {
+        var documentsRepository = new DocumentsCloudRepository();
+        var documentId = $('#openFileModalSelect').val();
+        when(documentsRepository.get(documentId))
+            .then(function(doc) {
+                app.openCallback(null, doc.Data);
+                app.document = doc;
+                $('#openFileModal').hide();
+            });
+    });
+    $('#openFileModalCancel').click(function() {
+        $('#openFileModal').hide();
+    });
+    $('#openFileModalDelete').click(function() {
+        var documentId = $('#openFileModalSelect').val();
+        if (!documentId) return;
+
+        var documentsRepository = new DocumentsCloudRepository();
+        when(documentsRepository.delete(documentId))
+            .then(function() {
+                updateOpenFileModal();
+            });
+    });
+}
+app.openFromCloud = function() {
+
+    updateOpenFileModal();
+
+};
+
+function updateOpenFileModal() {
+    var documentsRepository = new DocumentsCloudRepository();
+    when(documentsRepository.getAll())
+        .then(function(documents) {
+            var options = '';
+            for (var i = 0; i < documents.length; i++) {
+                var doc = documents[i];
+                options += '<option value="' + doc.Id + '">' + doc.Name + '</option>';
+            }
+            $('#openFileModalSelect').html(options);
+            $('#openFileModal').show();
+        });
+}
 /**
  * Format a JSON parse/stringify error as HTML
  * @param {Error} err
