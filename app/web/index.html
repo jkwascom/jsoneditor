@@ -1,11 +1,12 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 
-  <title>JSON Editor Online - view, edit and format JSON online</title>
+    <title>JSON Editor Online - view, edit and format JSON online</title>
 
-  <!--
+    <!--
 
   @file index_no_ads.html
 
@@ -40,96 +41,113 @@
   @date     @@date
   -->
 
-  <meta name="description" content="JSON Editor Online is a web-based tool to view, edit, and format JSON. It shows your data side by side in a clear, editable treeview and in a code editor.">
-  <meta name="keywords" content="json, editor, formatter, online, format, parser, json editor, json editor online, online json editor, javascript, javascript object notation, tools, tool, json tools, treeview, open source, free, json parser, json parser online, json formatter, json formatter online, online json formatter, online json parser, format json online">
-  <meta name="author" content="Jos de Jong">
+    <meta name="description" content="JSON Editor Online is a web-based tool to view, edit, and format JSON. It shows your data side by side in a clear, editable treeview and in a code editor.">
+    <meta name="keywords" content="json, editor, formatter, online, format, parser, json editor, json editor online, online json editor, javascript, javascript object notation, tools, tool, json tools, treeview, open source, free, json parser, json parser online, json formatter, json formatter online, online json formatter, online json parser, format json online">
+    <meta name="author" content="Jos de Jong">
 
-  <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="favicon.ico">
 
-  <link href="app.css" rel="stylesheet" type="text/css">
-  <link href="fileretriever.css" rel="stylesheet" type="text/css">
-  <link href="jsoneditor/css/jsoneditor.css" rel="stylesheet" type="text/css">
-  <link href="jsoneditor/css/menu.css" rel="stylesheet" type="text/css">
-  <link href="jsoneditor/css/searchbox.css" rel="stylesheet" type="text/css">
-  <link href="jsoneditor/css/contextmenu.css" rel="stylesheet" type="text/css">
-  <!-- TODO: droid font
+    <link href="app.css" rel="stylesheet" type="text/css">
+    <link href="fileretriever.css" rel="stylesheet" type="text/css">
+    <link href="jsoneditor/css/jsoneditor.css" rel="stylesheet" type="text/css">
+    <link href="jsoneditor/css/menu.css" rel="stylesheet" type="text/css">
+    <link href="jsoneditor/css/searchbox.css" rel="stylesheet" type="text/css">
+    <link href="jsoneditor/css/contextmenu.css" rel="stylesheet" type="text/css">
+    <!-- TODO: droid font
   <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
   -->
 
-  <script type="text/javascript" src="jsoneditor/js/jsoneditor.js"></script>
-  <script type="text/javascript" src="jsoneditor/js/treeeditor.js"></script>
-  <script type="text/javascript" src="jsoneditor/js/texteditor.js"></script>
-  <script type="text/javascript" src="jsoneditor/js/node.js"></script>
-  <script type="text/javascript" src="jsoneditor/js/appendnode.js"></script>
-  <script type="text/javascript" src="jsoneditor/js/contextmenu.js"></script>
-  <script type="text/javascript" src="jsoneditor/js/history.js"></script>
-  <script type="text/javascript" src="jsoneditor/js/searchbox.js"></script>
-  <script type="text/javascript" src="jsoneditor/js/modebox.js"></script>
-  <script type="text/javascript" src="jsoneditor/js/highlighter.js"></script>
-  <script type="text/javascript" src="jsoneditor/js/util.js"></script>
-  <script type="text/javascript" src="jsoneditor/js/module.js"></script>
-  <script type="text/javascript" src="queryparams.js"></script>
-  <script type="text/javascript" src="ajax.js"></script>
-  <script type="text/javascript" src="fileretriever.js"></script>
-  <script type="text/javascript" src="notify.js"></script>
-  <script type="text/javascript" src="splitter.js"></script>
-  <script type="text/javascript" src="app.js"></script>
-  <script type="text/javascript" src="lib/jsonlint/jsonlint.js"></script>
+    <script type="text/javascript" src="jsoneditor/js/jsoneditor.js"></script>
+    <script type="text/javascript" src="jsoneditor/js/treeeditor.js"></script>
+    <script type="text/javascript" src="jsoneditor/js/texteditor.js"></script>
+    <script type="text/javascript" src="jsoneditor/js/node.js"></script>
+    <script type="text/javascript" src="jsoneditor/js/appendnode.js"></script>
+    <script type="text/javascript" src="jsoneditor/js/contextmenu.js"></script>
+    <script type="text/javascript" src="jsoneditor/js/history.js"></script>
+    <script type="text/javascript" src="jsoneditor/js/searchbox.js"></script>
+    <script type="text/javascript" src="jsoneditor/js/modebox.js"></script>
+    <script type="text/javascript" src="jsoneditor/js/highlighter.js"></script>
+    <script type="text/javascript" src="jsoneditor/js/util.js"></script>
+    <script type="text/javascript" src="jsoneditor/js/module.js"></script>
+    <script type="text/javascript" src="queryparams.js"></script>
+    <script type="text/javascript" src="ajax.js"></script>
+    <script type="text/javascript" src="fileretriever.js"></script>
+    <script type="text/javascript" src="notify.js"></script>
+    <script type="text/javascript" src="splitter.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="lib/jsonlint/jsonlint.js"></script>
 
-  <script type="text/javascript" src="lib/ace/ace.js"></script>
-  <script type="text/javascript" src="lib/ace/mode-json.js"></script>
-  <script type="text/javascript" src="lib/ace/theme-textmate.js"></script>
-  <script type="text/javascript" src="lib/ace/theme-jsoneditor.js"></script>
+    <script type="text/javascript" src="lib/ace/ace.js"></script>
+    <script type="text/javascript" src="lib/ace/mode-json.js"></script>
+    <script type="text/javascript" src="lib/ace/theme-textmate.js"></script>
+    <script type="text/javascript" src="lib/ace/theme-jsoneditor.js"></script>
 
-  <style type="text/css">
+    <style type="text/css">
     div.convert-right {
-      background: url('jsoneditor/css/img/jsoneditor-icons.png') -0 -48px;
+        background: url('jsoneditor/css/img/jsoneditor-icons.png') -0 -48px;
     }
     div.convert-left {
-      background: url('jsoneditor/css/img/jsoneditor-icons.png') -24px -48px;
+        background: url('jsoneditor/css/img/jsoneditor-icons.png') -24px -48px;
     }
-  </style>
+    </style>
 </head>
 
 <body>
 
-<div id="header" >
-  <a href="http://jsoneditoronline.org" class="header">
-    <img alt="JSON Editor Online" title="JSON Editor Online" src="img/logo.png" id="logo">
-  </a>
+    <div id="header">
+        <a href="http://jsoneditoronline.org" class="header">
+            <img alt="JSON Editor Online" title="JSON Editor Online" src="img/logo.png" id="logo">
+        </a>
 
-  <div id="menu">
-    <ul>
-      <li>
-        <a id="clear" title="Clear contents">Clear</a>
-      </li>
-      <li>
-        <a id="open" title="Open file from disk">
+        <div id="menu">
+            <ul>
+                <li>
+                    <a id="clear" title="Clear contents">Clear</a>
+                </li>
+                <li>
+                    <a id="open" title="Open file from disk">
           Open
                     <span id="openMenuButton" title="Open file from disk or url">
                     &#x25BC;
                     </span>
         </a>
-        <ul id="openMenu">
-          <li>
-            <a id="menuOpenFile" title="Open file from disk">Open&nbsp;file</a>
-          </li>
-          <li>
-            <a id="menuOpenUrl" title="Open file from url">Open&nbsp;url</a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a id="save" title="Save file to disk">Save</a>
-      </li>
-      <li>
-        <a id="help" title="Open documentation (opens in a new window)" href="doc/index.html" target="_blank">Help</a>
-      </li>
-    </ul>
-  </div>
+                    <ul id="openMenu">
+                        <li>
+                            <a id="menuOpenCloud" title="Open file from cloud">Open&nbsp;from cloud</a>
+                        </li>
+                        <li>
+                            <a id="menuOpenFile" title="Open file from disk">Open&nbsp;file</a>
+                        </li>
+                        <li>
+                            <a id="menuOpenUrl" title="Open file from url">Open&nbsp;url</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a id="saveCloud" title="Save file to cloud">
+          Save
+                    <span id="saveMenuButton" title="Save file somewhere">
+                    &#x25BC;
+                    </span>
+        </a>
+                    <ul id="saveMenu">
+                        <li>
+                            <a id="menuSaveCloud" title="Save file to cloud">Save to cloud</a>
+                        </li>
+                        <li>
+                            <a id="save" title="Save file to disk">Save to disk</a>
+                        </li>
+                    </ul>
+                </li>
 
-  <!-- TODO: info, links, faq -->
-  <!--
+                <li>
+                    <a id="help" title="Open documentation (opens in a new window)" href="doc/index.html" target="_blank">Help</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- TODO: info, links, faq -->
+        <!--
 <div class="info" style="display:none;">
   JSON, or JavaScript Object Notation, is a lightweight text-based open standard
   designed for human-readable data interchange. It is derived from the JavaScript
@@ -153,75 +171,77 @@
 
 <div class="faq" style="display:none;"></div>
   -->
-</div>
-
-<div id="auto">
-  <div id="contents">
-    <div id="codeEditor"></div>
-
-    <div id="splitter">
-      <div id="buttons">
-        <div>
-          <button id="toTree" class="convert" title="Copy code to tree editor">
-            <div class="convert-right"></div>
-          </button>
-        </div>
-        <div>
-          <button id="toCode" class="convert" title="Copy tree to code editor">
-            <div class="convert-left"></div>
-          </button>
-        </div>
-      </div>
-      <div id="drag">
-      </div>
     </div>
 
-    <div id="treeEditor"></div>
+    <div id="auto">
+        <div id="contents">
+            <div id="codeEditor"></div>
 
-    <script type="text/javascript">
-      app.load();
-      app.resize();
-    </script>
+            <div id="splitter">
+                <div id="buttons">
+                    <div>
+                        <button id="toTree" class="convert" title="Copy code to tree editor">
+                            <div class="convert-right"></div>
+                        </button>
+                    </div>
+                    <div>
+                        <button id="toCode" class="convert" title="Copy tree to code editor">
+                            <div class="convert-left"></div>
+                        </button>
+                    </div>
+                </div>
+                <div id="drag">
+                </div>
+            </div>
 
-    <div id="ad" title="advertisement" >
-      <script type="text/javascript"><!--
-      google_ad_client = "ca-pub-7938810169574141";
-      /* jsoneditoronline_160x600 */
-      google_ad_slot = "4671869937";
-      google_ad_width = 160;
-      google_ad_height = 600;
-      //-->
-      </script>
+            <div id="treeEditor"></div>
 
-      <!--
+            <script type="text/javascript">
+            app.load();
+            app.resize();
+            </script>
+
+            <div id="ad" title="advertisement">
+                <script type="text/javascript">
+                <!--
+                google_ad_client = "ca-pub-7938810169574141";
+                /* jsoneditoronline_160x600 */
+                google_ad_slot = "4671869937";
+                google_ad_width = 160;
+                google_ad_height = 600;
+                 //-->
+                </script>
+
+                <!--
       <script type="text/javascript"
       src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
       </script>
       -->
 
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-<div id="footer">
-  <div id="footer-inner">
-    <a href="http://jsoneditoronline.org" class="footer">JSON Editor Online @@version</a>
-    &bull;
-    <a href="HISTORY.md" target="_blank" class="footer">History</a>
-    &bull;
-    <a href="https://github.com/josdejong/jsoneditor/" target="_blank" class="footer">Sourcecode</a>
-    &bull;
-    <a href="https://github.com/josdejong/jsoneditor/issues" target="_blank" class="footer">Report a bug</a>
-    &bull;
-    <a href="datapolicy.txt" target="_blank" class="footer">Data policy</a>
-    &bull;
-    <a href="NOTICE" target="_blank" class="footer">Copyright 2011-2013 Jos de Jong</a>
-  </div>
-</div>
+    <div id="footer">
+        <div id="footer-inner">
+            <a href="http://jsoneditoronline.org" class="footer">JSON Editor Online @@version</a>
+            &bull;
+            <a href="HISTORY.md" target="_blank" class="footer">History</a>
+            &bull;
+            <a href="https://github.com/josdejong/jsoneditor/" target="_blank" class="footer">Sourcecode</a>
+            &bull;
+            <a href="https://github.com/josdejong/jsoneditor/issues" target="_blank" class="footer">Report a bug</a>
+            &bull;
+            <a href="datapolicy.txt" target="_blank" class="footer">Data policy</a>
+            &bull;
+            <a href="NOTICE" target="_blank" class="footer">Copyright 2011-2013 Jos de Jong</a>
+        </div>
+    </div>
 
-<script type="text/javascript">
-  app.resize();
-</script>
+    <script type="text/javascript">
+    app.resize();
+    </script>
 
 </body>
+
 </html>
